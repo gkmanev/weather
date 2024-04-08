@@ -34,19 +34,19 @@ def make_weather_request(date, hour):
             forecast = weather_data.get("forecast", None)
             if forecast:
                 forecastday = forecast.get("forecastday", None)
-                print(forecastday)
-                # if forecastday[0]:
-                #     hour = forecastday[0].get("hour", None)
-                #     if hour:
-                #         time = hour[0].get("time", None)
-                #         temp = hour[0].get("temp_c", None)
-                #         clouds = hour[0].get("cloud", None)
-                #         heatindex = hour[0].get("heatindex_c", None)
-                #         uv = hour[0].get("uv", None)
-                #         if time and temp and clouds and heatindex and uv:
-                #             exist = Weather.objects.filter(timestamp=time, lat=lat,long=long)
-                #             if not exist:
-                #                 Weather.objects.create(timestamp=time, temperature=temp, clouds=clouds, heatindex=heatindex, lat=lat, long=long, uv=uv)
+                
+                if forecastday[0]:
+                    hour = forecastday[0].get("hour", None)
+                    if hour:
+                        time = hour[0].get("time", None)
+                        temp = hour[0].get("temp_c", None)
+                        clouds = hour[0].get("cloud", None)
+                        heatindex = hour[0].get("heatindex_c", None)
+                        uv = hour[0].get("uv", None)
+                        if time and temp and clouds and heatindex and uv:
+                            exist = Weather.objects.filter(timestamp=time, lat=lat,long=long)
+                            if not exist:
+                                Weather.objects.create(timestamp=time, temperature=temp, clouds=clouds, heatindex=heatindex, lat=lat, long=long, uv=uv)
          
     except HTTPError as http_err:
         logger.info(f"HTTP error occurred: {http_err}")
@@ -56,8 +56,8 @@ def make_weather_request(date, hour):
 
 def fill_history_data():
     count = -1
-    today = datetime.now() 
-    for i in range(2):
+    today = datetime.now() - timedelta(days=1) 
+    for i in range(24):
         count += 1
         one_hour_before = today - timedelta(hours=count)   
         date_part = one_hour_before.strftime('%Y-%m-%d')
