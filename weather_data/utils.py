@@ -21,7 +21,7 @@ def make_weather_request(date, hour):
         "hour":hour
         }
     headers = {
-        "X-RapidAPI-Key": "66dcbafb75msha536f3086b06788p1f5e7ajsnac1315877f0f",
+        "X-RapidAPI-Key": "b3987e9030mshdc8782a497a2fb2p1c6f2fjsnad1c1b9ddd22",
         "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
     }
     try:
@@ -29,7 +29,7 @@ def make_weather_request(date, hour):
         logger.info(f"here")
         if response.status_code == 200:
             weather_data = response.json()
-            print(weather_data)
+            
             forecast = weather_data.get("forecast", None)
             if forecast:
                 forecastday = forecast.get("forecastday", None)
