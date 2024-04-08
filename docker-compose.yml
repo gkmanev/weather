@@ -6,7 +6,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    command: gunicorn dashboard.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn weather_project.wsgi:application --bind 0.0.0.0:8000
     ports:
       - '8000:8000'
     environment:
@@ -57,7 +57,7 @@ services:
   celery_beat:
     build:
       context: ./
-    command: celery -A dashboard beat -l info
+    command: celery -A weather_project beat -l info
     environment:
       - POSTGRES_DB=postgres_latest
       - POSTGRES_USER=postgres
