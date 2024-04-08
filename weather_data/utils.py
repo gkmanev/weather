@@ -29,6 +29,7 @@ def make_weather_request(date, hour):
         logger.info(f"here")
         if response.status_code == 200:
             weather_data = response.json()
+            print(weather_data)
             forecast = weather_data.get("forecast", None)
             if forecast:
                 forecastday = forecast.get("forecastday", None)
