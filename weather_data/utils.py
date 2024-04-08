@@ -24,6 +24,7 @@ def make_weather_request(date, hour):
         "X-RapidAPI-Key": "b3987e9030mshdc8782a497a2fb2p1c6f2fjsnad1c1b9ddd22",
         "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
     }
+    print(querystring)
     try:
         response = requests.get(url, headers=headers, params=querystring)
         logger.info(f"here")
