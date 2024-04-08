@@ -25,7 +25,7 @@ services:
   db:
     image: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_new:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres_latest
       - POSTGRES_USER=postgres
@@ -70,4 +70,4 @@ services:
     restart: always
 
 volumes:
-  postgres_data:
+  postgres_data_new:
