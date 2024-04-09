@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     command: gunicorn weather_project.wsgi:application --bind 0.0.0.0:8009
     ports:
-      - '8000:8000'
+      - '8009:8009'
     environment:
       - POSTGRES_DB=postgres_latest
       - POSTGRES_USER=postgres
