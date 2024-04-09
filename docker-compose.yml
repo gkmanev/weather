@@ -6,7 +6,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    command: gunicorn weather_project.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn weather_project.wsgi:application --bind 0.0.0.0:8009
     ports:
       - '8000:8000'
     environment:
@@ -15,7 +15,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
       - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37,[::1]
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,192.168.1.11,85.14.6.37,[::1]
     depends_on:
       - redis
       - db
