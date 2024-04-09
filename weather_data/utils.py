@@ -58,7 +58,9 @@ def make_weather_request(date, hour):
 
 def fill_history_data():
     count = -1
-    today = timezone.localtime(timezone.now(), timezone='Europe/Sofia')
+    # Get the current time in the desired time zone
+    desired_timezone = timezone.get_timezone('Europe/Sofia')
+    today = timezone.localtime(timezone.now(), tzinfo=desired_timezone)
     print(today)
     for i in range(1):
         count += 1
