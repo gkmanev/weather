@@ -24,10 +24,10 @@ def make_weather_request(date, hour):
         "X-RapidAPI-Key": "b3987e9030mshdc8782a497a2fb2p1c6f2fjsnad1c1b9ddd22",
         "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com"
     }
-    print(querystring)
+    
     try:
         response = requests.get(url, headers=headers, params=querystring)
-        logger.info(f"here")
+        
         if response.status_code == 200:
             weather_data = response.json()
             
@@ -57,7 +57,7 @@ def make_weather_request(date, hour):
 def fill_history_data():
     count = -1
     today = datetime.now()
-    for i in range(24*30):
+    for i in range(24):
         count += 1
         one_hour_before = today - timedelta(hours=count)   
         date_part = one_hour_before.strftime('%Y-%m-%d')
