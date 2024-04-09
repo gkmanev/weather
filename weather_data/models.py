@@ -10,13 +10,12 @@ class MonthManager(models.Manager):
         beginning_of_month = today.replace(day=1)
         return super().get_queryset().filter(timestamp__gt = beginning_of_month)
 
-    # def from_beginning_of_year(self):
-    #     today = timezone.now().date()
-    #     beginning_of_year = today.replace(month=1, day=1)
-    #     return self.get_queryset().filter(timestamp__gte=beginning_of_year)
 
-
-
+class YearManager(models.Manager):    
+    def get_queryset(self):
+        today = datetime.now(timezone('Europe/London')).date()
+        beginning_of_year = today.replace(month=1, day=1)
+        return super().get_queryset().filter(timestamp__gt = beginning_of_year)
 
 
 class TodayManager(models.Manager):
@@ -39,4 +38,5 @@ class Weather(models.Model):
     long = models.FloatField()
     today = TodayManager()
     month = MonthManager()
+    year = YearManager()
     objects = models.Manager()

@@ -15,6 +15,5 @@ class WeatherListAPIView(generics.ListAPIView):
             elif date_range == 'month':
                 queryset = Weather.month.filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
             else:
-                pass
-                #queryset = Weather.custom_ranges.from_beginning_of_year().filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
+                queryset = Weather.year.filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
         return queryset
