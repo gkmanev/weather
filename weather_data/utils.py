@@ -56,8 +56,8 @@ def make_weather_request(date, hour):
 
 def fill_history_data():
     count = -1
-    today = datetime.now()
-    for i in range(24):
+    today = datetime.now() + timedelta(hours=2)
+    for i in range(48):
         count += 1
         one_hour_before = today - timedelta(hours=count)   
         date_part = one_hour_before.strftime('%Y-%m-%d')
