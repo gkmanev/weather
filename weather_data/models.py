@@ -4,27 +4,16 @@ from django.utils import timezone
 from pytz import timezone
 
 
-class CustomManager(models.Manager):
+class MonthManager(models.Manager):    
     def get_queryset(self):
-        return super().get_queryset()
-    
-    def today(self):
-        today = datetime.now(timezone('Europe/London')).date()
-        tomorrow = today + timedelta(1)
-        today_start = str(today)+'T'+'00:00:00Z'
-        today_end = str(tomorrow)+'T'+'00:00:00Z'
-        return self.get_queryset().filter(timestamp__gt = today_start, timestamp__lt = today_end)
-
-
-    def from_beginning_of_month(self):
         today = timezone.now().date()
         beginning_of_month = today.replace(day=1)
-        return self.get_queryset().filter(timestamp__gte=beginning_of_month)
+        return super().get_queryset().filter(timestamp__gt = beginning_of_month)
 
-    def from_beginning_of_year(self):
-        today = timezone.now().date()
-        beginning_of_year = today.replace(month=1, day=1)
-        return self.get_queryset().filter(timestamp__gte=beginning_of_year)
+    # def from_beginning_of_year(self):
+    #     today = timezone.now().date()
+    #     beginning_of_year = today.replace(month=1, day=1)
+    #     return self.get_queryset().filter(timestamp__gte=beginning_of_year)
 
 
 
@@ -48,5 +37,6 @@ class Weather(models.Model):
     uv = models.IntegerField(default=0)
     lat = models.FloatField()
     long = models.FloatField()
-    custom_ranges = CustomManager()
+    today = TodayManager()
+    month = MonthManager()
     objects = models.Manager()
