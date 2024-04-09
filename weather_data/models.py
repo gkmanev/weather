@@ -6,7 +6,7 @@ from pytz import timezone
 
 class MonthManager(models.Manager):    
     def get_queryset(self):
-        today = timezone.now().date()
+        today = datetime.now(timezone('Europe/London')).date()
         beginning_of_month = today.replace(day=1)
         return super().get_queryset().filter(timestamp__gt = beginning_of_month)
 
