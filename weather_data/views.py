@@ -11,9 +11,10 @@ class WeatherListAPIView(generics.ListAPIView):
         date_range = self.request.query_params.get('date_range', None)           
         if lat is not None and long is not None:
             if date_range == 'today':
-                queryset = Weather.custom_ranges.today().filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
+                queryset = Weather.today.filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
             elif date_range == 'month':
-                queryset = Weather.custom_ranges.from_beginning_of_month().filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
+                queryset = Weather.month.filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
             else:
-                queryset = Weather.custom_ranges.from_beginning_of_year().filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
+                pass
+                #queryset = Weather.custom_ranges.from_beginning_of_year().filter(lat__startswith=str(lat)[:2], long__startswith=str(long)[:2]).order_by("timestamp")
         return queryset
