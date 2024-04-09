@@ -95,7 +95,7 @@ CELERY_RESULT_BACKEND = os.getenv("CELERY_BACKEND", "redis://redis:6379/0")
 CELERY_BEAT_SCHEDULE = {
     'update_weather_data': {
         'task': 'weather_data.tasks.update_weather_data_task',
-        'schedule': crontab(),  # Run every min
+        'schedule': crontab(hour=10, minute=25),
     },
 }
 
