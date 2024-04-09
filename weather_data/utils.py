@@ -3,8 +3,7 @@ import logging
 import requests
 from datetime import datetime, timedelta
 from requests.exceptions import HTTPError
-from django.utils import timezone
-import pytz
+from pytz import timezone
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)  # Set to DEBUG for detailed logging
@@ -57,10 +56,8 @@ def make_weather_request(date, hour):
 
 
 def fill_history_data():
-    count = -1
-    # Get the current time in the desired time zone    
-    desired_timezone = pytz.timezone('Europe/Sofia')
-    today = timezone.localtime(timezone.now(), tzinfo=desired_timezone)
+    count = -1   
+    today = datetime.now(timezone('Europe/Sofia'))
     print(today)
     for i in range(1):
         count += 1
