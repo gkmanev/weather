@@ -39,6 +39,7 @@ def make_weather_request(date, hour):
                     hour = forecastday[0].get("hour", None)
                     if hour:
                         time = hour[0].get("time", None)
+                        print(time)
                         temp = hour[0].get("temp_c", None)
                         clouds = hour[0].get("cloud", None)
                         heatindex = hour[0].get("heatindex_c", None)
