@@ -38,13 +38,12 @@ def make_weather_request(date, hour):
                 if forecastday[0]:
                     hour = forecastday[0].get("hour", None)
                     if hour:
-                        time = hour[0].get("time", None)
-                        print(time)
+                        time = hour[0].get("time", None)                        
                         temp = hour[0].get("temp_c", None)
                         clouds = hour[0].get("cloud", None)
                         heatindex = hour[0].get("heatindex_c", None)
                         uv = hour[0].get("uv", None)
-                        logger.info("HERE!!!")
+                        logger.info(f"TEMP:{temp}")
                         if time and temp and clouds and heatindex and uv:
                             exist = Weather.objects.filter(timestamp=time, lat=lat,long=long)
                             logger.info(exist)
