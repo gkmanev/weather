@@ -43,13 +43,10 @@ def make_weather_request(date, hour):
                         clouds = hour[0].get("cloud", None)
                         heatindex = hour[0].get("heatindex_c", None)
                         uv = hour[0].get("uv", None)
-                        logger.info(f"TEMP:{temp}, Time:{time}, Clouds:{clouds}, Heat:{heatindex}, UV:{uv}")
-                        if time and temp and heatindex and uv:
-                            logger.info("HERE!!!!")
-                            exist = Weather.objects.filter(timestamp=time, lat=lat,long=long)
-                            logger.info(exist)
+                        
+                        if all(param is not None for param in [time,temp,clouds,heatindex,uv]):                            
+                            exist = Weather.objects.filter(timestamp=time, lat=lat,long=long)                            
                             if not exist:
-                                logger.info(f"Temperature: {temp}")
                                 Weather.objects.create(timestamp=time, temperature=temp, clouds=clouds, heatindex=heatindex, lat=lat, long=long, uv=uv)
          
     except HTTPError as http_err:
