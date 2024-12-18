@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','85.14.6.37','192.168.1.11']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','85.14.6.37','192.168.122.170']
 
 CORS_ORIGIN_ALLOW_ALL=True
 #CORS_ALLOW_ALL_ORIGINS = True
@@ -95,8 +95,8 @@ CELERY_RESULT_BACKEND = os.getenv("CELERY_BACKEND", "redis://redis:6379/0")
 CELERY_BEAT_SCHEDULE = {
     'update_weather_data': {
         'task': 'weather_data.tasks.update_weather_data_task',
-        #'schedule': crontab(minute=0),
-        'schedule': crontab(),
+        'schedule': crontab(minute='*/10'),
+        
     },
 }
 

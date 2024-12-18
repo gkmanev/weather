@@ -43,7 +43,7 @@ def make_weather_request(date, hour):
                         clouds = hour[0].get("cloud", None)
                         heatindex = hour[0].get("heatindex_c", None)
                         uv = hour[0].get("uv", None)
-                        
+                        print(f"Time: {time} || Temp: {temp}")
                         if all(param is not None for param in [time,temp,clouds,heatindex,uv]):                            
                             exist = Weather.objects.filter(timestamp=time, lat=lat,long=long)                            
                             if not exist:
